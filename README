@@ -1,0 +1,19 @@
+NAME
+   hfminstall - HFM.net installer script for Ubuntu Desktop 12.04
+
+SYNOPSIS
+   wget https://raw.github.com/team33/hfminstall/master/hfminstall
+   chmod +x hfminstall
+   ./hfminstall
+
+DESCRIPTION
+   hfminstall is a script that will install HFM.net on an Ubuntu Desktop 12.04
+   machine.  Once installed, you can start HFM.net by typing "hfm" at the
+   command prompt or by double-clicking the desktop icon.
+
+OPTIONS
+   none
+
+BUGS
+   Minimizing HFM.net in Linux causes the application to disappear completely
+

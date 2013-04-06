@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=0.9.1.595
+Name=HFM.net
+GenericName=Harlam Folding Monitor
+Icon=/var/lib/hfm/hfm_48_48.ico
+Exec=/usr/bin/hfm
+Categories=Accessories;Internet;
