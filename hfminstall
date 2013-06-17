@@ -67,3 +67,4 @@ cd $TARGET
 rm -f HFM.desktop
 download https://raw.github.com/team33/hfminstall/master/HFM.desktop
 chmod +x HFM.desktop
+chown $SUDO_USER HFM.desktop
