@@ -24,25 +24,23 @@ download()
 	return 0
 }
 
+trap "echo Premature exit." ERR
+
 # Make sure we are running with sudo
-trap "echo Premature exit." EXIT
 if [ "$(id -ru)" != "0" ]; then
 	echo ERROR: need root privileges. Run with sudo.
-	trap - EXIT
 	exit 1
 fi
 
 
 if [ -z "$SUDO_USER" ]; then
 	echo ERROR: SUDO_USER variable not set, cannot continue.
-	trap - EXIT
 	exit 1
 fi
 
 TARGET=$(eval echo ~$SUDO_USER/Desktop)
 if [ ! -e "$TARGET" ]; then
 	echo This does not appear to be a GUI install
-	trap - EXIT
 	exit 1
 fi
 
@@ -69,5 +67,3 @@ cd $TARGET
 rm -f HFM.desktop
 download https://raw.github.com/team33/hfminstall/master/HFM.desktop
 chmod +x HFM.desktop
-
-trap - EXIT
