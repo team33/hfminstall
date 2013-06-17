@@ -5,6 +5,25 @@
 # Dave Corfman <davecorfman@gmail.com>
 # Kris Rusocki <kszysiu@gmail.com> 
 #
+
+#
+# download a file
+# syntax: download <URL> [<output-file-name>]
+#
+download()
+{
+	local CURL_PARAM
+
+	[ -z "$1" ] && return 1
+	if which curl > /dev/null 2>&1 ; then
+		[ -z "$2" ] && CURL_PARAM="-O" || CURL_PARAM="-o $2"
+		curl -f -s -S -R -L $CURL_PARAM "$1" || return $?
+	else
+		wget -nv ${2:+-O $2} "$1" || return $?
+	fi
+	return 0
+}
+
 # Make sure we are running with sudo
 trap "echo Premature exit." EXIT
 if [ "$(id -ru)" != "0" ]; then
@@ -32,10 +51,10 @@ fi
 rm -rf /var/lib/hfm
 mkdir /var/lib/hfm
 cd /var/lib/hfm
-wget -nv http://hfm-net.googlecode.com/files/HFM%20Any%20CPU%200.9.1.595.zip
+download http://hfm-net.googlecode.com/files/HFM%20Any%20CPU%200.9.1.595.zip
 unzip "HFM Any CPU 0.9.1.595.zip"
 rm -f "HFM Any CPU 0.9.1.595.zip"
-wget -nv https://raw.github.com/team33/hfminstall/master/hfm_48_48.ico
+download https://raw.github.com/team33/hfminstall/master/hfm_48_48.ico
 #
 # Get mono
 apt-get -qq install mono-runtime libmono-system-windows-forms4.0-cil libmono-system-core4.0-cil libmono-system-runtime-serialization4.0-cil libmono-system-runtime4.0-cil
@@ -43,12 +62,12 @@ apt-get -qq install mono-runtime libmono-system-windows-forms4.0-cil libmono-sys
 # download hfm script to /usr/bin
 cd /usr/bin
 rm -f hfm
-wget -nv https://raw.github.com/team33/hfminstall/master/hfm
+download https://raw.github.com/team33/hfminstall/master/hfm
 chmod +x hfm
 # download desktop icon to $TARGET
 cd $TARGET
 rm -f HFM.desktop
-wget -nv https://raw.github.com/team33/hfminstall/master/HFM.desktop
+download https://raw.github.com/team33/hfminstall/master/HFM.desktop
 chmod +x HFM.desktop
 
 trap - EXIT
