@@ -53,7 +53,7 @@ cd /var/lib/hfm
 echo ==== Downloading HFM...
 download http://darkswarm.org/hfm-net/hfm-net-0.9.1.595-h4.zip
 echo ==== Extracting HFM...
-unzip hfm-net-0.9.1.595-h4.zip
+unzip -q hfm-net-0.9.1.595-h4.zip
 mv */* .
 rmdir hfm-net-0.9.1.595-h4
 rm hfm-net-0.9.1.595-h4.zip
