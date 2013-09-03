@@ -63,7 +63,7 @@ download https://raw.github.com/team33/hfminstall/master/hfm_48_48.ico
 #
 # Get mono
 echo ==== Installing Mono...
-apt-get -qq install libmono-system-runtime4.0-cil libmono-system-runtime-serialization4.0-cil libmono-system-windows-forms4.0-cil libmono-system-data-datasetextensions4.0-cil
+apt-get --no-upgrade -qq install libmono-system-runtime4.0-cil libmono-system-runtime-serialization4.0-cil libmono-system-windows-forms4.0-cil libmono-system-data-datasetextensions4.0-cil
 #
 # download hfm script to /usr/bin
 echo ==== Downloading HFM start script and desktop shortcut
