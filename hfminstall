@@ -9,6 +9,8 @@
 # Kris Rusocki <kszysiu@gmail.com> 
 #
 
+HFMROOTNAME=hfm-net-0.9.1.595-h6
+
 usage()
 {
 	echo Usage:
@@ -124,7 +126,6 @@ rm -rf /var/lib/hfm
 mkdir /var/lib/hfm
 cd /var/lib/hfm
 echo ==== Downloading HFM...
-HFMROOTNAME=hfm-net-0.9.1.595-h6
 download http://darkswarm.org/hfm-net/$HFMROOTNAME.zip
 echo ==== Extracting HFM...
 unzip -q $HFMROOTNAME.zip
