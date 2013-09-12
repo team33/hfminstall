@@ -1,10 +1,21 @@
 #!/bin/bash -e
+#
+# hfminstall 0.9
 # HFM.net installer for Linux
+#
 # Brought to you by The [H]orde
 # Copyright (c) 2013
 # Dave Corfman <davecorfman@gmail.com>
 # Kris Rusocki <kszysiu@gmail.com> 
 #
+
+usage()
+{
+	echo Usage:
+	echo -e \\t$0 -V\|--version
+	echo -e \\t$0 -h\|--help
+}
+
 
 #
 # download a file
@@ -23,6 +34,51 @@ download()
 	fi
 	return 0
 }
+
+#
+# Parse command-line options
+#
+OPT_VERSION=
+OPT_USAGE=
+
+while [ -n "$1" ]; do
+	case $1 in
+		(-V|--version)
+			OPT_VERSION=1
+			shift
+			;;
+		(-h|--help)
+			OPT_USAGE=1
+			shift
+			;;
+		(-*)
+			echo ERROR: invalid option -- $1
+			exit 1
+			;;
+		(*)
+			break
+			;;
+	esac
+done
+
+if [ -n "$1" ]; then
+	echo ERROR: excess argument -- $1
+	exit 1
+fi
+
+#
+# Check for command-line option conflicts
+#
+if [ -n "$OPT_VERSION$OPT_USAGE" -a "$OPT_VERSION$OPT_USAGE" != "1" ]; then
+	echo ERROR: conflicting arguments
+	exit 1
+fi
+
+#
+# Process command-line options
+#
+[ -n "$OPT_USAGE" ] && usage && exit 0
+[ -n "$OPT_VERSION" ] && echo hfminstall 0.9 && exit 0
 
 trap "echo Premature exit." ERR
 
