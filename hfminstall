@@ -55,7 +55,7 @@ fi
 #
 # check if HFM is already running
 #
-IN_USE=$(fuser /var/lib/hfm/HFM.exe 2> /dev/null)
+IN_USE=$(fuser /var/lib/hfm/HFM.exe 2> /dev/null || true)
 if [ -n "$IN_USE" ]; then
 	echo Detected running HFM instance. Please stop HFM \(PID\(s\) $IN_USE\) and re-run $0
 	exit 1
