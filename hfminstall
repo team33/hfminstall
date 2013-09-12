@@ -45,6 +45,23 @@ if [ ! -e "$TARGET" ]; then
 fi
 
 #
+# check if fuser is working, need it to check if HFM is running
+#
+if ! fuser $PWD &> /dev/null ; then
+	echo ERROR: fuser missing or not operational, cannot continue.
+	exit 1
+fi
+
+#
+# check if HFM is already running
+#
+IN_USE=$(fuser /var/lib/hfm/HFM.exe 2> /dev/null)
+if [ -n "$IN_USE" ]; then
+	echo Detected running HFM instance. Please stop HFM \(PID\(s\) $IN_USE\) and re-run $0
+	exit 1
+fi
+
+#
 # Make directory for HFM.net, d/l, and unzip
 echo ==== Deleting current HFM installation, if any...
 rm -rf /var/lib/hfm
