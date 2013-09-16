@@ -1,2 +1,3 @@
 #!/bin/bash
+echo Launching HFM, please wait...
 nohup mono /var/lib/hfm/HFM.exe > /dev/null 2>&1 &
