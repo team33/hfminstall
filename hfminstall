@@ -38,6 +38,24 @@ download()
 }
 
 #
+# execute command with external shell; retry if unsuccessful (up to 5 times total)
+#
+try()
+{
+	local I=5
+	
+	while true ; do
+		$SHELL -c "$1" && return 0
+		I=$(($I-1))
+		[ $I = 0 ] && break
+		echo ==== WARNING: "$1" failed, retrying in 5 seconds...
+		sleep 5
+		echo ==== Retrying now, this may take a while...
+	done
+	return 1
+}
+
+#
 # Parse command-line options
 #
 OPT_VERSION=
@@ -137,7 +155,7 @@ download https://raw.github.com/team33/hfminstall/master/hfm_48_48.ico
 #
 # Get mono
 echo ==== Installing Mono...
-apt-get --no-upgrade -qq install libmono-system-runtime4.0-cil libmono-system-runtime-serialization4.0-cil libmono-system-windows-forms4.0-cil libmono-system-data-datasetextensions4.0-cil
+try "apt-get --no-upgrade -qq install libmono-system-runtime4.0-cil libmono-system-runtime-serialization4.0-cil libmono-system-windows-forms4.0-cil libmono-system-data-datasetextensions4.0-cil"
 #
 # download hfm script to /usr/bin
 echo ==== Downloading HFM start script and desktop shortcut
